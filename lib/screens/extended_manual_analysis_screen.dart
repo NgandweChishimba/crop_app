@@ -73,7 +73,7 @@ class _ExtendedManualAnalysisScreenState
   }
 
   void _goHome() {
-    final dest = widget.fromLogin ? HomeScreen() : LoginScreen();
+    final dest = widget.fromLogin ? DashboardScreen() : LoginScreen();
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => dest));
   }
 
