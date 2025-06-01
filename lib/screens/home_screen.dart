@@ -69,55 +69,63 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: InkWell(
-          onTap:
-              () => {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (_, __, ___) => ProfileScreen(),
-                    transitionsBuilder:
-                        (_, a, __, c) => SlideTransition(
-                          position: Tween<Offset>(
-                            begin: const Offset(1.0, 0.0),
-                            end: Offset.zero,
-                          ).animate(a),
-                          child: c,
-                        ),
-                  ),
-                ),
-              },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(child: Icon(Icons.person)),
-          ),
-        ),
-        title: Text("Dashboard"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: _loadData,
-            tooltip: 'Refresh Data',
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            Expanded(
-              child:
-                  _isLoading && !_hasInitialData
-                      ? _buildShimmerLoader()
-                      : _buildSensorGrid(),
+    return Stack(
+      children: [
+        Image.asset("assets/maize.jpg",fit: BoxFit.cover,
+        width: double.infinity,
+          height: double.infinity,),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            leading: InkWell(
+              onTap:
+                  () => {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => ProfileScreen(),
+                        transitionsBuilder:
+                            (_, a, __, c) => SlideTransition(
+                              position: Tween<Offset>(
+                                begin: const Offset(1.0, 0.0),
+                                end: Offset.zero,
+                              ).animate(a),
+                              child: c,
+                            ),
+                      ),
+                    ),
+                  },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(child: Icon(Icons.person)),
+              ),
             ),
-            const SizedBox(height: 20),
-            _buildPredictionSection(),
-          ],
+            title: Text("Dashboard"),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.refresh),
+                onPressed: _loadData,
+                tooltip: 'Refresh Data',
+              ),
+            ],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              children: [
+                Expanded(
+                  child:
+                      _isLoading && !_hasInitialData
+                          ? _buildShimmerLoader()
+                          : _buildSensorGrid(),
+                ),
+                const SizedBox(height: 20),
+                _buildPredictionSection(),
+              ],
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 
@@ -169,7 +177,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         style: FilledButton.styleFrom(
           backgroundColor: Theme.of(
             context,
-          ).colorScheme.primary.withOpacity(0.2),
+          ).colorScheme.primary,
           foregroundColor: Colors.black,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -196,11 +204,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
           spacing: 10,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.auto_graph, size: 40, color: Colors.deepPurple),
+            Icon(Icons.auto_graph, size: 40),
             Text(
               "Manual Analysis",
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Colors.deepPurple,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -294,8 +301,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         borderRadius: BorderRadius.circular(20),
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).colorScheme.primary.withOpacity(0.1),
-            Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+            Theme.of(context).colorScheme.primary.withOpacity(0.8),
+            Theme.of(context).colorScheme.secondary.withOpacity(0.8),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -312,9 +319,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   'Recommended Crop',
                   style: Theme.of(
                     context,
-                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold,color: Colors.white),
                 ),
-                Icon(Icons.spa, color: Theme.of(context).colorScheme.primary),
+                Icon(Icons.spa, color: Colors.white),
               ],
             ),
             const SizedBox(height: 15),

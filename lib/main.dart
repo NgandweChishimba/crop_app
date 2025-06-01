@@ -1,5 +1,5 @@
 import 'package:crop_app/screens/home_screen.dart';
-import 'package:crop_app/screens/manual_analysis_screen.dart';
+import 'package:crop_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/splash_screen.dart';
 
@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Crop Recommender',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.grey.shade100,
         appBarTheme: AppBarTheme(
